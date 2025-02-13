@@ -84,26 +84,27 @@ function getBirthYearMovies(e) {
 
         let json = JSON.parse(this.responseText);
         let html = "";
+
+        let counter = 0;
+
+        for (let i = 0; counter < 6; i++) {
+          let movie = json.results[i];
+
+          if (json.results[i].poster_path === null) {
+            continue;
+          } else {
+            html += `<section class="yrMovie">
+                        <img src="${imgUrl}${movie.poster_path}" alt="">
+                        <h3>${movie.title}</h3>
+                    </section>`;
+            counter++;
+          }
+        }
+
+        // add to the page
+        birthYearMovies.innerHTML = html;
       }
     });
-
-    /*
-            // This code can be used for the display of the movies from the given year
-            // It skips any movies that don't include a poster
-            // currently only displays the top six movies from that year but can be adjusted
-            let counter = 0;
-            for(let i = 0; counter < 6; i++){
-                if(json.results[i].poster_path === null){
-                    continue;
-                }else{
-                    `<section class="yrMovie">
-                        <img src="${"TO DO"}" alt="">
-                        <h3>${"TO DO"}</h3>
-                    </section>`; 
-                    counter++;
-                }
-            }
-        */
 
     // set the response type
 
